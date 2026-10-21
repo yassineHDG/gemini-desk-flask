@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Erreur {{ status_code }} — Gemini Desk{% endblock %}
+{% block body %}
+<main class="grid min-h-screen place-items-center px-6 py-16">
+  <div class="max-w-lg text-center">
+    <p class="font-mono text-sm font-semibold tracking-widest text-red-600">ERREUR {{ status_code }}</p>
+    <h1 class="mt-4 text-3xl font-semibold tracking-tight text-balance">La demande n'a pas pu aboutir.</h1>
+    <p class="mt-4 text-base leading-7 text-slate-600 text-pretty">{{ message }}</p>
+    <div class="mt-8 flex justify-center gap-3">
+      <a href="/" class="rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700">Retour au chat</a>
+      <a href="/journal" class="rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50">Voir le journal</a>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f8fa" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22><rect width=%2264%22 height=%2264%22 rx=%2216%22 fill=%22%232563eb%22/><text x=%2232%22 y=%2240%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2224%22 font-weight=%22700%22 fill=%22white%22>GD</text></svg>" />
+    <title>{% block title %}Gemini Desk{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}" />
+    {% block head %}{% endblock %}
+  </head>
+  <body class="min-h-screen bg-[#f7f8fa] text-slate-950 antialiased">
+    {% block body %}{% endblock %}
+  </body>
+</html>

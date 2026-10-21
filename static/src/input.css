@@ -1,0 +1,275 @@
+@import "tailwindcss";
+
+@source "../../templates/**/*.html";
+@source "../js/**/*.js";
+
+@layer base {
+  * {
+    touch-action: manipulation;
+  }
+
+  body {
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    overflow-x: hidden;
+  }
+
+  button,
+  a,
+  select,
+  textarea,
+  input {
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600;
+  }
+
+  svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+  }
+}
+
+@layer components {
+  .icon-button {
+    @apply grid size-9 shrink-0 place-items-center rounded-lg text-slate-500 transition-colors hover:bg-slate-200/70 hover:text-slate-950;
+  }
+
+  .icon-button svg {
+    @apply size-[18px];
+  }
+
+  .secondary-button {
+    @apply inline-flex h-9 items-center justify-center gap-2 whitespace-nowrap rounded-lg border border-slate-300 bg-white px-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-950 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .control-select {
+    @apply h-9 max-w-44 rounded-lg border border-slate-300 bg-white px-3 text-sm font-medium text-slate-700 shadow-sm outline-none hover:border-slate-400 focus:border-blue-600;
+  }
+
+  .conversation-row {
+    @apply relative mb-0.5 flex min-w-0 items-center rounded-lg text-slate-600 transition-colors hover:bg-white hover:text-slate-950;
+  }
+
+  .conversation-row.is-active {
+    @apply bg-white text-slate-950 shadow-sm;
+    box-shadow: inset 3px 0 0 #2563eb, 0 1px 2px rgb(15 23 42 / 0.04);
+  }
+
+  .composer {
+    @apply flex items-end gap-1 rounded-2xl border border-slate-300 bg-white p-2 shadow-sm transition-shadow focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100;
+  }
+
+  .response-mode {
+    @apply inline-flex min-h-9 cursor-pointer items-center gap-2 rounded-lg border border-slate-300 bg-white px-3 text-xs font-semibold text-slate-600 transition-colors hover:border-slate-400 hover:text-slate-950;
+  }
+
+  .response-mode:has(input:checked) {
+    @apply border-blue-300 bg-blue-50 text-blue-800;
+  }
+
+  .response-mode input {
+    @apply size-4 cursor-pointer rounded border-slate-300 accent-blue-600;
+  }
+
+  .response-mode:has(input:disabled) {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  .confidence-legend {
+    @apply flex shrink-0 items-center gap-3 text-[11px] font-medium text-slate-500;
+  }
+
+  .confidence-legend span {
+    @apply inline-flex items-center gap-1.5;
+  }
+
+  .confidence-dot {
+    @apply block size-2 rounded-full;
+  }
+
+  .confidence-dot-sure {
+    @apply bg-red-600;
+  }
+
+  .confidence-dot-uncertain {
+    @apply bg-blue-600;
+  }
+
+  .category-chip {
+    @apply rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-800;
+  }
+
+  .message-block {
+    @apply flex flex-col py-3;
+  }
+
+  .message-user {
+    @apply items-end;
+  }
+
+  .message-assistant {
+    @apply items-start;
+  }
+
+  .message-role {
+    @apply mb-1.5 px-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-slate-500;
+  }
+
+  .message-user .message-role {
+    @apply text-right;
+  }
+
+  .message-content {
+    @apply min-w-0 max-w-[88%] break-words text-[15px] leading-7;
+  }
+
+  .message-user .message-content {
+    @apply whitespace-pre-wrap rounded-[20px] rounded-br-md bg-blue-600 px-4 py-2.5 text-white shadow-sm;
+  }
+
+  .message-assistant .message-content {
+    @apply w-full max-w-[94%] rounded-[20px] rounded-bl-md border border-slate-200 bg-white px-5 py-4 text-slate-800 shadow-sm;
+  }
+
+  .markdown-body > :first-child,
+  .confidence-segment > :first-child {
+    @apply mt-0;
+  }
+
+  .markdown-body > :last-child,
+  .confidence-segment > :last-child {
+    @apply mb-0;
+  }
+
+  .markdown-body p {
+    @apply my-3;
+  }
+
+  .markdown-body h1 {
+    @apply mb-3 mt-6 text-2xl font-bold leading-tight tracking-tight;
+  }
+
+  .markdown-body h2 {
+    @apply mb-3 mt-6 text-xl font-bold leading-tight tracking-tight;
+  }
+
+  .markdown-body h3 {
+    @apply mb-2 mt-5 text-lg font-semibold leading-tight;
+  }
+
+  .markdown-body h4,
+  .markdown-body h5,
+  .markdown-body h6 {
+    @apply mb-2 mt-4 font-semibold;
+  }
+
+  .markdown-body ul {
+    @apply my-3 list-disc space-y-1 pl-6;
+  }
+
+  .markdown-body ol {
+    @apply my-3 list-decimal space-y-1 pl-6;
+  }
+
+  .markdown-body blockquote {
+    @apply my-4 border-l-4 border-blue-300 bg-blue-50/70 py-2 pl-4 pr-3 italic text-slate-700;
+  }
+
+  .markdown-body a {
+    @apply font-medium text-blue-700 underline decoration-blue-300 underline-offset-2 hover:text-blue-900;
+  }
+
+  .markdown-body :not(pre) > code {
+    @apply rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[0.9em] text-slate-900;
+  }
+
+  .markdown-body pre {
+    @apply my-4 max-w-full overflow-x-auto rounded-xl bg-slate-950 p-4 font-mono text-[13px] leading-6 text-slate-100;
+  }
+
+  .markdown-body pre code {
+    @apply bg-transparent p-0 text-inherit;
+  }
+
+  .markdown-body table {
+    @apply my-4 block max-w-full overflow-x-auto border-collapse text-sm;
+  }
+
+  .markdown-body th,
+  .markdown-body td {
+    @apply border border-slate-300 px-3 py-2 text-left align-top;
+  }
+
+  .markdown-body th {
+    @apply bg-slate-100 font-semibold;
+  }
+
+  .markdown-body hr {
+    @apply my-5 border-slate-200;
+  }
+
+  .confidence-segment + .confidence-segment {
+    @apply mt-3;
+  }
+
+  .confidence-sure {
+    @apply font-medium text-red-700;
+  }
+
+  .confidence-uncertain {
+    @apply text-blue-700;
+  }
+
+  .confidence-caption {
+    @apply mt-2 max-w-[94%] px-1 text-[11px] leading-5 text-slate-500;
+  }
+
+  .attachment-badge {
+    @apply mb-2 inline-flex w-fit max-w-[88%] items-center gap-2 truncate rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-600;
+  }
+
+  .attachment-badge svg {
+    @apply size-4 shrink-0;
+  }
+
+  .message-metrics {
+    @apply mt-3 flex max-w-[94%] flex-wrap gap-x-4 gap-y-1 px-1 text-[11px] font-medium tracking-wide text-slate-500 tabular-nums;
+  }
+
+  .message-metrics span + span::before {
+    content: "·";
+    margin-right: 1rem;
+    color: #cbd5e1;
+  }
+
+  .sql-report {
+    @apply mt-3 max-w-[94%] rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950;
+  }
+
+  .sql-report summary {
+    @apply cursor-pointer font-semibold;
+  }
+
+  .sql-report ul {
+    @apply mt-3 list-disc space-y-1 pl-5 leading-6;
+  }
+
+  .log-level {
+    @apply inline-flex rounded-full px-2 py-1 text-[10px] font-bold tracking-wider;
+  }
+
+  .log-error {
+    @apply bg-red-50 text-red-700;
+  }
+
+  .log-warning {
+    @apply bg-amber-50 text-amber-700;
+  }
+}
+
+@media (max-width: 639px) {
+  .message-metrics span + span::before {
+    margin-right: 0.5rem;
+  }
+}

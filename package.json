@@ -1,0 +1,13 @@
+{
+  "name": "gemini-desk-flask",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev:css": "tailwindcss -i ./static/src/input.css -o ./static/css/output.css --watch",
+    "build:css": "tailwindcss -i ./static/src/input.css -o ./static/css/output.css --minify"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.0",
+    "tailwindcss": "4.3.0"
+  }
+}

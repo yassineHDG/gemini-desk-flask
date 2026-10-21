@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Journal des erreurs — Gemini Desk{% endblock %}
+{% block body %}
+<main class="mx-auto min-h-screen max-w-7xl px-4 py-8 sm:px-8">
+  <div class="flex flex-wrap items-end justify-between gap-4 border-b border-slate-200 pb-6">
+    <div>
+      <a href="/" class="text-sm font-semibold text-blue-700 hover:text-blue-800">← Retour aux conversations</a>
+      <h1 class="mt-4 text-3xl font-semibold tracking-tight text-balance">Journal des erreurs</h1>
+      <p class="mt-2 text-sm text-slate-600">Les 250 événements les plus récents enregistrés dans MySQL.</p>
+    </div>
+    <span class="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold tabular-nums text-slate-600">{{ errors|length }} événement(s)</span>
+  </div>
+
+  <div class="mt-6 overflow-hidden rounded-xl border border-slate-200 bg-white">
+    <div class="overflow-x-auto">
+      <table class="w-full min-w-[760px] text-left text-sm">
+        <thead class="border-b border-slate-200 bg-slate-50 text-[11px] uppercase tracking-[0.08em] text-slate-500">
+          <tr><th class="px-4 py-3">Date UTC</th><th class="px-4 py-3">Niveau</th><th class="px-4 py-3">Route</th><th class="px-4 py-3">Type</th><th class="px-4 py-3">Message</th></tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          {% for error in errors %}
+          <tr class="align-top hover:bg-slate-50">
+            <td class="whitespace-nowrap px-4 py-3 font-mono text-xs text-slate-500">{{ error.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+            <td class="px-4 py-3"><span class="log-level {{ 'log-error' if error.level == 'ERROR' else 'log-warning' }}">{{ error.level }}</span></td>
+            <td class="px-4 py-3 font-mono text-xs text-slate-600">{{ error.endpoint or '—' }}</td>
+            <td class="px-4 py-3 text-slate-700">{{ error.error_type or '—' }}</td>
+            <td class="max-w-xl break-words px-4 py-3 text-slate-700">{{ error.message }}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="5" class="px-4 py-16 text-center text-slate-500">Aucune erreur enregistrée.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+{% endblock %}
